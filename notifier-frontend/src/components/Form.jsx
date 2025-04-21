@@ -31,7 +31,7 @@ const Form = ({message}) => {
         <div className="flex  gap-3 mb-4 text-[#09455D]">
           <img src={logo} alt="notifier logo" className="w-12 h-12" />
           <div className="flex flex-col">
-            <h1 className="text-2xl ">Notifier</h1>
+            <h1 className="text-4xl ">Notifier</h1>
             <p className="text-sm">Never forget the people who matter</p>
           </div>
         </div>
@@ -65,9 +65,9 @@ const Form = ({message}) => {
             Sign In
           </button>
          <div className="flex justify-center items-center gap-3">
-                     <img src={yahoo} alt="" className="w-16 cursor-pointer"/>
-                     <img src={other} alt="" className="cursor-pointr"/>
-                     <img src={google} alt="" className="cursor-pointer"/>
+                     <img src={yahoo} alt="" className="w-16 h-auto cursor-pointer"/>
+                     <img src={other} alt="" className=" w-6 h-auto hover:opacity-80 cursor-pointer"/>
+                     <img src={google} alt="" className=" w-6 h-auto hover:opacity-80 cursor-pointer"/>
                    </div>
         </form>
       </div>
