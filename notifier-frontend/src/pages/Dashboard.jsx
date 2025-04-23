@@ -4,6 +4,7 @@ import { LiaBirthdayCakeSolid } from "react-icons/lia"
 import { MdOutlineCelebration } from "react-icons/md";
 import ReminderSection from '../components/ReminderSection';
 import Filter from "../components/Filter"
+import ActivitySection from '@/components/ActivitySection';
 
 const Dashboard = () => {
   return (
@@ -28,9 +29,7 @@ const Dashboard = () => {
             </div>
             <ReminderSection />
         </div>
-        <div className='flex flex-row  w-[25%] h-full'>
-            Hey
-        </div>
+        <ActivitySection />
     </div>
   )
 }
