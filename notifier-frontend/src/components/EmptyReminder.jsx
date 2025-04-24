@@ -7,7 +7,8 @@ const EmptyReminder = () => {
 
   return (
     <div
-      className="w-[175px] flex flex-col rounded-2xl justify-center items-center shadow-xl bg-[#D7F4FF] h-[195px]"
+      className="w-[175px] flex flex-col rounded-2xl justify-center items-center shadow-xl bg-[#D7F4FF] h-[195px] cursor-pointer"
+      onClick={() => setShowModal(true)}
     >
       <div className='w-[80px] h-[80px] rounded-full bg-white flex justify-center items-center' onClick={() => setShowModal(true)}>
         <FaPlus className='text-3xl cursor-pointer' />
