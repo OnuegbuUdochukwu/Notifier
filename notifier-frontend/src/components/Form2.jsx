@@ -5,7 +5,6 @@ import logo from "../assets/icons/Vector.png";
 import yahoo from "../assets/icons/logos_yahoo.png";
 import google from "../assets/icons/devicon_google.png";
 import other from "../assets/icons/vscode-icons_file-type-outlook.png";
-import { Eye, EyeOff } from 'lucide-react';
 
 
 const Form = () => {
