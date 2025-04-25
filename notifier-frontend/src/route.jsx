@@ -1,9 +1,6 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
-
-
-
 const Auth = lazy(() => import('./pages/auth'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 

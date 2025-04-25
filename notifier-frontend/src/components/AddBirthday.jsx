@@ -55,7 +55,7 @@ const AddBirthday = ({ open, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-30 flex justify-center items-center px-2  ">
-      <div className="relative w-full  bg-white rounded-xl p-4 max-h-[60vh] overflow-y-auto max-w-[600px] shadow-lg">
+      <div className="relative   bg-white rounded-xl p-4 max-h-[60vh] w-auto overflow-y-auto max-w-[600px] shadow-lg">
         <button
           onClick={onClose}
           className="absolute top-3 right-2 text-gray-700 text-2xl"

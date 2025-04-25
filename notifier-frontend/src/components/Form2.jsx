@@ -5,8 +5,11 @@ import logo from "../assets/icons/Vector.png";
 import yahoo from "../assets/icons/logos_yahoo.png";
 import google from "../assets/icons/devicon_google.png";
 import other from "../assets/icons/vscode-icons_file-type-outlook.png";
+import { Eye, EyeOff } from 'lucide-react';
+
 
 const Form = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     password: "",
     username: "",
@@ -59,7 +62,8 @@ const Form = () => {
             required
             onChange={handleChange}
           />
-          <FloatingInput
+          <div className="relative">
+            <FloatingInput
             type="password"
             name="password"
             value={formData.password}
@@ -67,14 +71,12 @@ const Form = () => {
             required
             onChange={handleChange}
           />
-          <FloatingInput
-            type="password"
-            name="password"
-            value={formData.password}
-            label="Confirm Password"
-            required
-            onChange={handleChange}
-          />
+          <button>
+
+          </button>
+          </div>
+          
+        
           <div className="flex justify-center gap-4 items-center mt-4">
             <button type="button" className="px-6 py-2 text-gray-600 hover:text-gray-800">
               Cancel

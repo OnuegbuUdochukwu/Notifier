@@ -5,7 +5,7 @@ import ActivityCard from './ActivityCard';
 
 const ActivitySection = () => {
   return (
-    <section className='w-1/4 flex flex-col mt-16 mr-1 bg-[F8F8F8] p-4 rounded-lg gap-6 shadow-md'>
+    <section className='flex w-[300px] flex-col mt-16 mr-1 bg-[F8F8F8] p-4 rounded-lg gap-6 shadow-md'>
         <div className='flex items-center gap-4'>
             <img
             src={data[0].pic}
@@ -34,5 +34,6 @@ const ActivitySection = () => {
 
   )
 }
+
 
 export default ActivitySection
