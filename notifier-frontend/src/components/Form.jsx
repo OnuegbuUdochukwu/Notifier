@@ -5,9 +5,13 @@ import logo from "../assets/icons/Vector.png";
 import yahoo from "../assets/icons/logos_yahoo.png";
 import google from "../assets/icons/devicon_google.png";
 import other from "../assets/icons/vscode-icons_file-type-outlook.png";
-
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 const Form = ({message}) => {
+  const [isOpen,setIsOpen] = useState(true)
+  const handlePassword = ()=>{
+        setIsOpen(!isOpen)
+  }
     const handleClcik = () => {
         message(true)
     }
@@ -52,14 +56,27 @@ const Form = ({message}) => {
             required
             onChange={handleChange}
           />
-          <FloatingInput
-            type="password"
+          <div className="relative">
+              <FloatingInput
+            type={isOpen?"text":"password"}
             name="password"
             value={formData.password}
             label="Password"
             required
             onChange={handleChange}
           />
+          <button 
+  type="button" 
+  className="absolute top-3 z-10 right-3" 
+  onClick={handlePassword}
+>
+  {isOpen ? 
+    <IoEyeOutline className="w-5 h-5 text-gray-500 hover:text-blue-600"/> : 
+    <IoEyeOffOutline className="w-5 h-5 text-gray-500 hover:text-blue-600"/>
+  }
+</button>
+          </div>
+        
           <p className="text-xs text-gray-600 -mt-3 hover:text-blue-600 transition-all cursor-pointer">forgot email password?</p>
           <button className="bg-[#09455d] py-2 text-white rounded-full">
             Sign In

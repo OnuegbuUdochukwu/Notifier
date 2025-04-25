@@ -5,7 +5,7 @@ import logo from "../assets/icons/Vector.png";
 import yahoo from "../assets/icons/logos_yahoo.png";
 import google from "../assets/icons/devicon_google.png";
 import other from "../assets/icons/vscode-icons_file-type-outlook.png";
-
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5"; 
 
 const Form = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -28,6 +28,11 @@ const Form = () => {
     }
     console.log(formData);
   };
+
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="flex flex-col md:flex-row justify-between bg-white border border-gray-500 rounded-xl p-12 w-full max-w-4xl gap-8">
       <div className="flex flex-col gap-12 md:w-1/2 text-[#09455D]">
@@ -63,19 +68,24 @@ const Form = () => {
           />
           <div className="relative">
             <FloatingInput
-            type="password"
-            name="password"
-            value={formData.password}
-            label="Password"
-            required
-            onChange={handleChange}
-          />
-          <button>
-
-          </button>
+              type={showPassword ? "text" : "password"}
+              name="password"
+              value={formData.password}
+              label="Password"
+              required
+              onChange={handleChange}
+            />
+            <button 
+              type="button"
+              onClick={togglePassword}
+              className="absolute top-3 z-10 right-3"
+            >
+              {showPassword ? 
+                <IoEyeOutline className="w-5 h-5 text-gray-500 hover:text-blue-600"/> : 
+                <IoEyeOffOutline className="w-5 h-5 text-gray-500 hover:text-blue-600"/>
+              }
+            </button>
           </div>
-          
-        
           <div className="flex justify-center gap-4 items-center mt-4">
             <button type="button" className="px-6 py-2 text-gray-600 hover:text-gray-800">
               Cancel
