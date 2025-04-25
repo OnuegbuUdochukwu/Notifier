@@ -3,24 +3,34 @@ import { createBrowserRouter } from "react-router-dom";
 
 const Auth = lazy(() => import('./pages/auth'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
+const LandingPage = lazy(() => import('./pages/LandingPage'));
 
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: (
       <Suspense fallback={<div>Loading...</div>}>
         <Auth />
       </Suspense>
-    )
+    ),
   },
   {
-    path: '/dashboard',
+    path: "/dashboard",
     element: (
       <Suspense fallback={<div>Loading...</div>}>
         <Dashboard />
       </Suspense>
-    )
+    ),
+  },
+
+  {
+    path: "/landingpage",
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <LandingPage/>
+      </Suspense>
+    ),
   },
 
 ]);

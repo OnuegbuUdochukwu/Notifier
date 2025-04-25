@@ -13,8 +13,8 @@ const ReminderCard = ({birthday}) => {
 
 
   return (
-    <div className =" w-[250px] flex flex-col rounded-2xl justify-center items-center  shadow-xl bg-white  ">
-        <img src={birthday.pic} className='size-[80px] aspect-auto rounded-full object-center object-cover mt-1 mb-4' />
+    <div className =" w-[175px]  flex flex-col rounded-2xl justify-center items-center  shadow-xl bg-white  h-[195px] ">
+        <img src={birthday.pic} className='w-[80px] h-[80px] aspect-auto rounded-full mt-1 mb-4' />
         <h3 className='text-lg text-[#09455D]'>{ ` ${birthday.fName} ${birthday.lName}`}</h3>
         <p className='text-sm text-[#09455D]'>
             { birthday.age ?

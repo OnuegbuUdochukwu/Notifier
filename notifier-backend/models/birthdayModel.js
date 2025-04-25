@@ -1,7 +1,11 @@
 const mongoose = require('mongoose')
 
 const birthdaySchema = new mongoose.Schema({
-    name: {
+    firstName: {
+        type: String,
+        required: [true, "please provide a name"]
+    },
+    lastName: {
         type: String,
         required: [true, "please provide a name"]
     },
@@ -9,11 +13,11 @@ const birthdaySchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    }
+    // user: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'User',
+    //     required: true
+    // }
 })
 
 module.exports = mongoose.model('birthday', birthdaySchema)

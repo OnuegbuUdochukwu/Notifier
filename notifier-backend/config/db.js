@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-require('dotenv').config
+require('dotenv').config()
 
 async function connectDB() {
     try {
@@ -7,6 +7,7 @@ async function connectDB() {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
+       
     } catch (err) {
         console.log(err)
     }
