@@ -1,18 +1,46 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
+const Auth = lazy(() => import('./pages/auth'));
+ const Dashboard = lazy(() => import('./pages/Dashboard'));
+const LandingPage = lazy(() => import('./pages/LandingPage'));
 
-const Home = lazy(() => import('./pages/Home'));
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <Home />
+        <LandingPage/>
       </Suspense>
-    )
-  }
+    ),
+  },
+  {
+    path: "/auth",
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <Auth />
+      </Suspense>
+    ),
+  },
+
+  {
+    path: "/landingpage",
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <LandingPage/>
+      </Suspense>
+    ),
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <Dashboard/>
+      </Suspense>
+    ),
+  },
+
 ]);
 
-export default router;
+export default router
