@@ -1,7 +1,18 @@
 const Birthday = require('../models/birthdayModel')
 
-module.exports.home = (req, res)=>{
-    res.send("hello")
+module.exports.getAllBdays = async(req, res)=>{
+    try{
+        const birthdayAll = await Birthday.find().sort({birthday: 1})
+        if(!birthdayAll) res.status(400).json({message: "no birthdays found"})
+        
+        res.json({
+            count: birthdayAll.length,
+            birthdayAll
+        })
+    }catch(err){
+        res.status(500).json({message: err.message})
+    }
+   
 }
 
 module.exports.addBirthday = async(req, res)=>{

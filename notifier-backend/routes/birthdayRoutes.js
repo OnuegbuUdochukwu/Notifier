@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const {
-    home,
+    getAllBdays,
     addBirthday, 
     searchBirthday,
     updateBirthday,
@@ -11,7 +11,7 @@ const {
 } = require('../controllers/birthdayController')
 
 
-router.get('/', home )
+router.get('/', getAllBdays )
 router.get('/add', addBirthday)
 // router.get('/search/', searchBirthday)
 router.get('/countdown/:id', getCountdown)
