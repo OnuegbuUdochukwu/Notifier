@@ -31,7 +31,7 @@ module.exports.updateBirthday = async (req, res)=>{
     try{
         const birthdayEntry = await Birthday.findOne({
             _id : req.params.id,
-            // user: req.user._id
+            user: req.user._id
         })
         if(!birthdayEntry) res.status(404).json({message: 'birthday not found'})
         
