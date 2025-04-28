@@ -83,7 +83,7 @@ module.exports.deleteBirthday  = async(req, res)=>{
     try{
         const birthday = await Birthday.findOne({
             _id: req.params.id,
-            // user: req.user._id
+            user: req.user._id
         })
 
         if(!birthday){
