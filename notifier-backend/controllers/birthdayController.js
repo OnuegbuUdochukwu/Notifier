@@ -2,7 +2,7 @@ const Birthday = require('../models/birthdayModel')
 
 module.exports.getAllBdays = async(req, res)=>{
     try{
-        const birthdayAll = await Birthday.find().sort({birthday: 1})
+        const birthdayAll = await Birthday.find({user: req.user._id}).sort({birthday: 1})
         if(!birthdayAll) res.status(400).json({message: "no birthdays found"})
         
         res.json({
@@ -17,8 +17,15 @@ module.exports.getAllBdays = async(req, res)=>{
 
 module.exports.addBirthday = async(req, res)=>{
     const {firstName, lastName, birthday} = req.body
+    
     try {
-        const newBirthday = new Birthday({firstName, lastName, birthday})
+        const newBirthday = new Birthday({
+            firstName, 
+            lastName, 
+            birthday,
+            user: req.user._id,
+            image: req.file ? req.file.path : null
+        })
         await newBirthday.save()
         res.status(201).json(newBirthday)
     } catch (err) {
@@ -38,6 +45,7 @@ module.exports.updateBirthday = async (req, res)=>{
         if (firstName) birthdayEntry.firstName = firstName;
         if (lastName) birthdayEntry.lastName = lastName;
         if(birthday)birthdayEntry.birthday = birthday;
+        if(req.file) birthday.image = req.file.path
 
         const updated = await birthdayEntry.save();
         res.json({
@@ -52,7 +60,10 @@ module.exports.updateBirthday = async (req, res)=>{
 module.exports.getCountdown = async (req,res)=>{
     try{
         const { id } = req.params
-        const user = await Birthday.findById(id)
+        const user = await Birthday.findOne({
+            _id : id,
+            user: req.user._id
+        })
 
         if(!user) res.status(404).json({message: "couldn't find that person"})
         

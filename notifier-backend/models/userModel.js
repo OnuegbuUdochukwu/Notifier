@@ -22,16 +22,20 @@ const userSchema = new mongoose.Schema({
 })
 
 
-userSchema.pre('save', async function(next){
-    if(!this.isModified('passowrd')) return next()
-    this.password = await bcrypt.hash(this.password, 10)
-    next()
-})
+userSchema.pre('save', async function(next) {
+    if (!this.isModified('password')) {
+      return next(); // If password not modified (e.g., update profile), skip hashing
+    }
+  
+    const salt = await bcrypt.genSalt(10); // 10 is a good safe number
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  })
 
-userSchema.statics.login = async function(email, passowrd){
+userSchema.statics.login = async function(email, password){
     const user = await this.findOne({email})
     if(user){
-        const auth = await bcrypt.compare(passowrd, user.passowrd)
+        const auth = await bcrypt.compare(password, user.password)
         if(auth){
             return user
         }else{
@@ -41,3 +45,5 @@ userSchema.statics.login = async function(email, passowrd){
     throw new Error("incorrect email");
     
 }
+
+module.exports = mongoose.model('User', userSchema);

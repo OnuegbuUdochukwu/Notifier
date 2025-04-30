@@ -6,10 +6,11 @@ module.exports.getUsername = async(req, res)=>{
         res.json({
             username: user.name || user.email
             });
-        } 
-        catch (err) {
-            res.status(500).json({ message: err.message });
-        }
+    } 
+    catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 }
+
     
     

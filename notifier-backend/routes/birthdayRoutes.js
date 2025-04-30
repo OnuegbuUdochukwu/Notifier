@@ -10,6 +10,7 @@ const {
 } = require('../controllers/birthdayController')
 
 const protect = require('../middleware/authMiddleware')
+const {upload} = require('../middleware/cloudinary')
 
 
 router.get('/', protect, getAllBdays )
@@ -18,5 +19,7 @@ router.get('/add', protect , addBirthday)
 router.get('/countdown/:id', protect,  getCountdown)
 router.put('/edit/:id', protect,  updateBirthday)
 router.delete('/delete/:id', protect,  deleteBirthday)
+router.post('/add', protect, upload.single('image'), addBirthday)
+router.put('/:id', protect, upload.single('image'), updateBirthday)
 
 module.exports = router;
