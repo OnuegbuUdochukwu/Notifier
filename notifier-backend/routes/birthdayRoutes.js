@@ -22,4 +22,11 @@ router.delete('/delete/:id', protect,  deleteBirthday)
 router.post('/add', protect, upload.single('image'), addBirthday)
 router.put('/:id', protect, upload.single('image'), updateBirthday)
 
+// manually test email reminder
+router.get('/test-email', async(req, res)=>{
+    const {sendBirthdayReminder } = require('../utils/emailService')
+    await sendBirthdayReminder('ikechukwujo45@gmail.com', "dummy guy")
+    res.send('email sent')
+})
+
 module.exports = router;

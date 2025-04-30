@@ -17,7 +17,6 @@ module.exports.getAllBdays = async(req, res)=>{
 
 module.exports.addBirthday = async(req, res)=>{
     const {firstName, lastName, birthday} = req.body
-    
     try {
         const newBirthday = new Birthday({
             firstName, 
