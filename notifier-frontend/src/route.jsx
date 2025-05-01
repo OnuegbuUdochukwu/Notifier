@@ -23,15 +23,6 @@ const router = createBrowserRouter([
       </Suspense>
     ),
   },
-
-  {
-    path: "/landingpage",
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <LandingPage/>
-      </Suspense>
-    ),
-  },
   {
     path: "/dashboard",
     element: (

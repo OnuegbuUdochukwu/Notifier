@@ -1,14 +1,20 @@
 import React from "react";
 import FloatingInput from "./FloatingInput";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/icons/Vector.png";
 import yahoo from "../assets/icons/logos_yahoo.png";
 import google from "../assets/icons/devicon_google.png";
 import other from "../assets/icons/vscode-icons_file-type-outlook.png";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+import useAuthStore from "@/hooks/useAuthStore";
+import axios from "axios";
 
 const Form = ({message}) => {
-  const [isOpen,setIsOpen] = useState(true)
+  const [isOpen,setIsOpen] = useState(true);
+  const navigate = useNavigate();
+
+  const login = useAuthStore((state) => state.setToken);
   const handlePassword = ()=>{
         setIsOpen(!isOpen)
   }
@@ -17,17 +23,34 @@ const Form = ({message}) => {
     }
   const [formData, setFormData] = useState({
     password: "",
-    username_email: "",
+    email : "",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    //submit logic here once endpoint is ready
     console.log(formData);
+    const url = "http://localhost:5000/api/auth/login";
+    try {
+      const { data } = await axios.post(url, {
+        password: formData.password,
+        email: formData.email
+      });
+        if (data.user) {
+          alert("Logged in successfully");
+          login(data.user.name);
+          navigate("/dashboard");
+        }
+    } catch (error) {
+      console.log("Error is", error);
+      alert("Error logging in.");
+    }
+ 
+    //submit logic here once endpoint is ready
+   
   };
   return (
     <div className="flex flex-col md:flex-row justify-center border border-gray-400  bg-white rounded-xl px-10 py-16 gap-16 ">
@@ -49,10 +72,10 @@ const Form = ({message}) => {
       <div className=" md:w-1/2">
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <FloatingInput
-            type="text"
-            name="username"
-            value={formData.username}
-            label="Username"
+            type="email"
+            name="email"
+            value={formData.email}
+            label="Email"
             required
             onChange={handleChange}
           />
@@ -66,10 +89,10 @@ const Form = ({message}) => {
             onChange={handleChange}
           />
           <button 
-  type="button" 
-  className="absolute top-3 z-10 right-3" 
-  onClick={handlePassword}
->
+        type="button" 
+        className="absolute top-3 z-10 right-3" 
+        onClick={handlePassword}
+    >
   {isOpen ? 
     <IoEyeOutline className="w-5 h-5 text-gray-500 hover:text-blue-600"/> : 
     <IoEyeOffOutline className="w-5 h-5 text-gray-500 hover:text-blue-600"/>

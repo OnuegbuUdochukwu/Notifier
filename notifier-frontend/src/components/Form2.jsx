@@ -5,6 +5,9 @@ import logo from "../assets/icons/Vector.png";
 import yahoo from "../assets/icons/logos_yahoo.png";
 import google from "../assets/icons/devicon_google.png";
 import other from "../assets/icons/vscode-icons_file-type-outlook.png";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import useAuthStore from "@/hooks/useAuthStore";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5"; 
 
 const Form = () => {
@@ -13,20 +16,35 @@ const Form = () => {
     password: "",
     username: "",
     email: "",
-    confirmPassword: "",
-  });
+    });
+  const navigate = useNavigate();
+  const signUp = useAuthStore((state) => state.setToken);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     //submit logic here once endpoint is ready
-    if (formData.password !== formData.confirmPassword) {
-      alert("passwords do not match");
-    }
-    console.log(formData);
+    // if (formData.password !== formData.confirmPassword) {
+    //   alert("passwords do not match");
+    //   return;
+    // }
+    const url = "http://localhost:5000/api/auth/signup";
+    try {
+      const { data } =  await axios.post(url, formData);
+      console.log(data);
+      if(data.user){
+        alert("Logged in successfully");
+        signUp(data.user.name);
+        navigate("/dashboard");
+      }
+
+    } catch (error) {
+      console.log("Error is", error);
+      alert("Error making account");
+    };
   };
 
   const togglePassword = () => {
