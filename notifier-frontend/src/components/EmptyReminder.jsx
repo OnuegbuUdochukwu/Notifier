@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FaPlus } from 'react-icons/fa6';
 import AddBirthday from './AddBirthday';
 
-const EmptyReminder = () => {
+const EmptyReminder = ({ onUpdate }) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -14,7 +14,7 @@ const EmptyReminder = () => {
         <FaPlus className='text-3xl cursor-pointer' />
       </div>
       <p className='text-[#09455D] text-base'>Add new reminder</p>
-      <AddBirthday open={showModal} onClose={() => setShowModal(false)} />
+      <AddBirthday open={showModal} onClose={() => setShowModal(false)} onUpdate={onUpdate}/>
     </div>
   );
 };

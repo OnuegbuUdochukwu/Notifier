@@ -8,12 +8,16 @@ const birthdayRoutes  = require('./routes/birthdayRoutes')
 const userRoutes = require('./routes/userRoutes');
 
 
-connectDB()
 
 const corsOption = {
-    origin: 'http://localhost:5174',
+    origin: 'http://localhost:5173',
     credentials: true,
 }
+
+connectDB()
+
+
+
 
 app.use(cors(corsOption))
 app.use(express.json())
