@@ -45,7 +45,7 @@ const ActivitySection = () => {
             ))}
         </div>
         <p className="text-sm text-gray-400 mt-3 mx-auto">More activities will show up here</p>
-        <button className='bg-red-700 rounded-lg shadow-sm hover:bg-red-800 transition-all duration-300 px-3 py-2 text-white' onClick={handleLogout}>logout</button>
+        <button className='bg-red-700 rounded-lg shadow-sm hover:bg-red-800 transition-all duration-300 px-3 py-2 text-white'>logout</button>
     </section>
 
   )
