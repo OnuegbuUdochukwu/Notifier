@@ -3,10 +3,23 @@ import data from '@/constant'
 import { GoPulse } from "react-icons/go";
 import ActivityCard from './ActivityCard';
 import axios from 'axios';
+import useAuthStore from '@/hooks/useAuthStore';
+import { useNavigate } from 'react-router-dom';
 
 
 const ActivitySection = () => {
-
+    const navigate = useNavigate();
+    const logout = useAuthStore((state) => state.logout);
+    const handleLogout = async () => {
+        try{
+            await logout();
+            navigate('/auth')
+        }
+        catch(error){
+            console.error('logout failed',error)
+            alert("logout failed please kill yourself")
+        }
+    }
     const [user, setUser] = useState("");
     useEffect(() => {
         const fetchUser = async () => {
@@ -45,7 +58,7 @@ const ActivitySection = () => {
             ))}
         </div>
         <p className="text-sm text-gray-400 mt-3 mx-auto">More activities will show up here</p>
-        <button className='bg-red-700 rounded-lg shadow-sm hover:bg-red-800 transition-all duration-300 px-3 py-2 text-white'>logout</button>
+        <button className='bg-red-700 rounded-lg shadow-sm hover:bg-red-800 transition-all duration-300 px-3 py-2 text-white' onClick={handleLogout}>logout</button>
     </section>
 
   )
