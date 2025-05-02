@@ -1,27 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState} from 'react'
 import data from '@/constant'
 import { GoPulse } from "react-icons/go";
 import ActivityCard from './ActivityCard';
+import axios from 'axios';
+
 
 const ActivitySection = () => {
-    const handleLogout = async()=>{
-            // try{
 
-            // }
-            // catch(){
-                
-            // }
-    }
+    const [user, setUser] = useState("");
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const { data } = await axios.get("http://localhost:5000/api/user/username", {
+                    withCredentials: true
+                  });
+                setUser(data.username);
+            } catch (error) {
+                alert("Error")
+                console.log(error);
+            }
+        };
+    
+        fetchUser();
+    }, []);
   return (
     <section className='flex w-[300px] flex-col mt-16 mr-1 bg-[F8F8F8] p-4 rounded-lg gap-6 shadow-md'>
         <div className='flex items-center gap-4'>
-            <img
-            src={data[0].pic}
-            alt='profile'
-            className='w-[45px] h-[45px] rounded-full object-cover'
-            />
+            
             <h3 className='text-lg text-[#09455D] font-medium'>
-            {`${data[0].fName} ${data[0].lName}`}
+            {user}
             </h3>
         </div>
 

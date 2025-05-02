@@ -18,7 +18,7 @@ const Form = ({message}) => {
   const handlePassword = ()=>{
         setIsOpen(!isOpen)
   }
-    const handleClcik = () => {
+    const handleClick = () => {
         message(true)
     }
   const [formData, setFormData] = useState({
@@ -38,7 +38,10 @@ const Form = ({message}) => {
       const { data } = await axios.post(url, {
         password: formData.password,
         email: formData.email
+      }, {
+        withCredentials: true
       });
+      
         if (data.user) {
           alert("Logged in successfully");
           login(data.user.name);
@@ -63,7 +66,7 @@ const Form = ({message}) => {
           </div>
         </div>
         <div 
-          onClick={handleClcik} 
+          onClick={handleClick} 
           className="cursor-pointer hover:text-blue-600 transition-all"
         >
           <p className="text-gray-500">Create account →</p>

@@ -37,7 +37,10 @@ const Form = ({event}) => {
     // }
     const url = "http://localhost:5000/api/auth/signup";
     try {
-      const { data } =  await axios.post(url, formData);
+      const { data } =  await axios.post(url, formData,  {
+        withCredentials: true
+      });
+      console.log(data);
       if(data.user){
         alert("Logged in successfully");
         signUp(data.user.name);
