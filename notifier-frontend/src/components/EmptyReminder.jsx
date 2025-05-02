@@ -14,7 +14,7 @@ const EmptyReminder = () => {
         <FaPlus className='text-3xl cursor-pointer' />
       </div>
       <p className='text-[#09455D] text-base'>Add new reminder</p>
-      <AddBirthday open={showModal} onClose={() => setShowModal(false)} />
+      <AddBirthday isopen={showModal} onClose={() => setShowModal(false)}  />
     </div>
   );
 };

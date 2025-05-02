@@ -10,14 +10,18 @@ import { useNavigate } from "react-router-dom";
 import useAuthStore from "@/hooks/useAuthStore";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5"; 
 
-const Form = () => {
+const Form = ({event}) => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     password: "",
     username: "",
     email: "",
     });
+
   const navigate = useNavigate();
+  const handleBack = ()=>{
+    event(true)
+  }
   const signUp = useAuthStore((state) => state.setToken);
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,7 +38,6 @@ const Form = () => {
     const url = "http://localhost:5000/api/auth/signup";
     try {
       const { data } =  await axios.post(url, formData);
-      console.log(data);
       if(data.user){
         alert("Logged in successfully");
         signUp(data.user.name);
@@ -105,7 +108,7 @@ const Form = () => {
             </button>
           </div>
           <div className="flex justify-center gap-4 items-center mt-4">
-            <button type="button" className="px-6 py-2 text-gray-600 hover:text-gray-800">
+            <button onclick={handleBack} type="button" className="px-6 py-2 text-gray-600 hover:text-gray-800">
               Cancel
             </button>
             <button className="bg-[#09455D] rounded-full px-6 py-2 text-white hover:bg-[#0a5470]">

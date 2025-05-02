@@ -16,9 +16,9 @@ const Dashboard = () => {
     <div  className="h-full w-full relative bg-gradient-to-r from-white to-[#F8F8F8] flex  justify-center flex-row gap-24 p-5  " >
         <div className='flex flex-col  h-full '>
             <div className='flex gap-1.5 mb-10 justify-between items-center'>
-                <div>
+                <div className='flex gap-2'>
                     <img src={logo} alt="notifier logo" className="w-7 h-8 aspect-auto " />
-                <h1 className="text-3xl text-black">Notifier</h1>
+                    <h1 className="text-3xl text-black">Notifier</h1>
 
                 </div>
                 <div onClick={handleMenu} className='space-y-1 md:hidden'>
@@ -26,7 +26,7 @@ const Dashboard = () => {
                <div className={`w-5 h-1 rounded-full bg-black ${isMenu? "hidden":""}`} ></div>
                <div className={`w-5 h-1 rounded-full bg-black ${isMenu ? "-rotate-45 -translate-y-2 transition-all":""}`}></div>
                 </div>
-                
+               
             </div>
             <div className=' flex flex-col justify-center max-w-[570px] bg-[#B4E5F8] rounded-3xl py-3 px-5 w-full mb-8'>
                 <h1 className='text-3xl text-[#09455D] mb-4'>Birthday Planner</h1>

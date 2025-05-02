@@ -10,8 +10,6 @@ const ReminderCard = ({birthday}) => {
     day: 'numeric'
     });
 
-
-
   return (
     <div className =" w-[175px]  flex flex-col rounded-2xl justify-center items-center  shadow-xl bg-white  h-[195px] ">
         <img src={birthday.pic} className='w-[80px] h-[80px] aspect-auto rounded-full mt-1 mb-4' />

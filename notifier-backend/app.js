@@ -6,7 +6,6 @@ const authRoutes = require('./routes/authRoutes')
 const birthdayRoutes  = require('./routes/birthdayRoutes')
 const userRoutes = require('./routes/userRoutes');
 
-
 connectDB()
 
 app.use(express.json())

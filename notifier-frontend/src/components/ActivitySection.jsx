@@ -4,6 +4,14 @@ import { GoPulse } from "react-icons/go";
 import ActivityCard from './ActivityCard';
 
 const ActivitySection = () => {
+    const handleLogout = async()=>{
+            // try{
+
+            // }
+            // catch(){
+                
+            // }
+    }
   return (
     <section className='flex w-[300px] flex-col mt-16 mr-1 bg-[F8F8F8] p-4 rounded-lg gap-6 shadow-md'>
         <div className='flex items-center gap-4'>
@@ -30,6 +38,7 @@ const ActivitySection = () => {
             ))}
         </div>
         <p className="text-sm text-gray-400 mt-3 mx-auto">More activities will show up here</p>
+        <button className='bg-red-700 rounded-lg shadow-sm hover:bg-red-800 transition-all duration-300 px-3 py-2 text-white' onClick={handleLogout}>logout</button>
     </section>
 
   )
