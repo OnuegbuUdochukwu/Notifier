@@ -5,6 +5,7 @@ import Form2 from "../components/Form2"
 
 const Auth = () => {
   const [route, setRoute] = useState(false);
+  
   const handleRoute = (value) => {
     setRoute(value)
   }
@@ -19,7 +20,7 @@ const Auth = () => {
             <Form message={handleRoute} />
           </div>
           <div className={route ? "block px-4" : "hidden"}>
-            <Form2 />
+            <Form2 event={handleRoute}/>
           </div>
         </div>
       </div>

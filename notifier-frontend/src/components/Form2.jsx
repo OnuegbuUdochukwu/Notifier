@@ -20,7 +20,7 @@ const Form = ({event}) => {
 
   const navigate = useNavigate();
   const handleBack = ()=>{
-    event(true)
+    event(false)
   }
   const signUp = useAuthStore((state) => state.setToken);
   const handleChange = (e) => {
@@ -111,7 +111,7 @@ const Form = ({event}) => {
             </button>
           </div>
           <div className="flex justify-center gap-4 items-center mt-4">
-            <button onclick={handleBack} type="button" className="px-6 py-2 text-gray-600 hover:text-gray-800">
+            <button onClick={handleBack} type="button" className="px-6 py-2 text-gray-600 cursor-pointer hover:text-gray-800">
               Cancel
             </button>
             <button className="bg-[#09455D] rounded-full px-6 py-2 text-white hover:bg-[#0a5470]">

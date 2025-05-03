@@ -57,7 +57,7 @@ const Form = ({message}) => {
   };
   return (
     <div className="flex flex-col md:flex-row justify-center border border-gray-400  bg-white rounded-xl px-10 py-16 gap-16 ">
-      <div className="mb-6 md:mb-0 flex justify-between  flex-col md:w-1/2">
+      <div className="mb-6 md:mb-0 flex justify-between gap-20 md:gap-0  flex-col md:w-1/2">
         <div className="flex  gap-3 mb-4 text-[#09455D]">
           <img src={logo} alt="notifier logo" className="w-12 h-12" />
           <div className="flex flex-col">
@@ -69,7 +69,7 @@ const Form = ({message}) => {
           onClick={handleClick} 
           className="cursor-pointer hover:text-blue-600 transition-all"
         >
-          <p className="text-gray-500">Create account →</p>
+          <p className="text-gray-500 ml-10 text-xl">Create account →</p>
         </div>
       </div>
       <div className=" md:w-1/2">

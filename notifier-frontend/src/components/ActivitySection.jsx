@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback} from 'react'
+import React, { useEffect, useState} from 'react'
 // import data from '@/constant'
 import { GoPulse } from "react-icons/go";
 import ActivityCard from './ActivityCard';
@@ -17,7 +17,7 @@ const ActivitySection = ({fetchBirthdays, birthdays}) => {
         }
         catch(error){
             console.error('logout failed',error)
-            alert("logout failed please kill yourself")
+            alert("logout failed please try again")
         }
     }
     const [user, setUser] = useState("");
@@ -40,7 +40,7 @@ const ActivitySection = ({fetchBirthdays, birthdays}) => {
 
     
   return (
-    <section className='flex w-[300px] flex-col mt-16 mr-1 bg-[F8F8F8] p-4 rounded-lg gap-6 shadow-md'>
+    <section className='flex w-[300px] flex-col mt-16 mr-1 bg-[F8F8F8] h-[800px] overflow-y-scroll p-4 rounded-lg gap-6 shadow-md'>
         <div className='flex items-center gap-4'>
             
             <h3 className='text-lg text-[#09455D] font-medium'>
