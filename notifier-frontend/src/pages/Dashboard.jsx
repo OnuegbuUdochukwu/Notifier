@@ -64,13 +64,13 @@ const Dashboard = () => {
             <ReminderSection fetchBirthdays={fetchBirthdays} birthdays={birthdays}/>
         </div>
         {
-           <div  className={`fixed top-0 left-0 h-screen max-h-[500px] bg-white shadow-lg w-[300px] transform transition-transform duration-300 ease-in-out ${
+           <div  className={`fixed top-0 left-0 h-screen  bg-white shadow-lg w-[300px] transform transition-transform duration-300 ease-in-out ${
             isMenu ? 'translate-x-0' : '-translate-x-full'
         } md:hidden`}>
                 <ActivitySection fetchBirthdays={fetchBirthdays} birthdays={birthdays} />
            </div>
         }
-        <div className= "hidden md:block ">
+        <div className= "hidden md:block">
         <ActivitySection fetchBirthdays={fetchBirthdays} birthdays={birthdays}/>
         </div>
        
