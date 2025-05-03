@@ -1,17 +1,37 @@
 import React from 'react'
-import {useState} from 'react'
+import {useState, useCallback, useEffect} from 'react'
 import logo from "../assets/icons/Vector.png";
 import { LiaBirthdayCakeSolid } from "react-icons/lia"
 import { MdOutlineCelebration } from "react-icons/md";
 import ReminderSection from '../components/ReminderSection';
 import Filter from "../components/Filter"
 import ActivitySection from '@/components/ActivitySection';
+import axios from 'axios';
 
 const Dashboard = () => {
     const [isMenu,setIsMenu] = useState(false);
+    const [birthdays, setBirthdays] = useState([]);
+
     const handleMenu = ()=>{
             setIsMenu(!isMenu)
     }
+
+    const fetchBirthdays = useCallback(async () => {
+        try {
+          const { data } = await axios.get("http://localhost:5000/api/birthday/", {
+            withCredentials: true,
+          });
+          setBirthdays(data.birthdayAll || []);
+        } catch (error) {
+          console.error("Fetch error:", error);
+          alert("Error loading birthdays");
+        } 
+      });
+    
+      useEffect(() => {
+        fetchBirthdays();
+      }, [fetchBirthdays]);
+
   return (
     <div  className="h-full w-full relative bg-gradient-to-r from-white to-[#F8F8F8] flex  justify-center flex-row gap-24 p-5  " >
         <div className='flex flex-col  h-full '>
@@ -41,17 +61,17 @@ const Dashboard = () => {
                 <h2 className='text-2xl  text-[#09455D]'>My reminders</h2>
                 <Filter />
             </div>
-            <ReminderSection />
+            <ReminderSection fetchBirthdays={fetchBirthdays} birthdays={birthdays}/>
         </div>
         {
-           <div  className={`fixed top-0 left-0 h-screen bg-white shadow-lg w-[300px] transform transition-transform duration-300 ease-in-out ${
+           <div  className={`fixed top-0 left-0 h-screen max-h-[500px] bg-white shadow-lg w-[300px] transform transition-transform duration-300 ease-in-out ${
             isMenu ? 'translate-x-0' : '-translate-x-full'
         } md:hidden`}>
-                <ActivitySection/>
+                <ActivitySection fetchBirthdays={fetchBirthdays} birthdays={birthdays} />
            </div>
         }
-        <div className= "hidden md:block">
-        <ActivitySection />
+        <div className= "hidden md:block ">
+        <ActivitySection fetchBirthdays={fetchBirthdays} birthdays={birthdays}/>
         </div>
        
     </div>

@@ -7,8 +7,7 @@ import useAuthStore from '@/hooks/useAuthStore';
 import { useNavigate } from 'react-router-dom';
 
 
-const ActivitySection = () => {
-    const [birthdays, setBirthdays] = useState([]);
+const ActivitySection = ({fetchBirthdays, birthdays}) => {
     const navigate = useNavigate();
     const logout = useAuthStore((state) => state.logout);
     const handleLogout = async () => {
@@ -39,21 +38,6 @@ const ActivitySection = () => {
         fetchUser();
     }, []);
 
-    const fetchBirthdays = useCallback(async () => {
-        try {
-          const { data } = await axios.get("http://localhost:5000/api/birthday/", {
-            withCredentials: true,
-          });
-          setBirthdays(data.birthdayAll || []);
-        } catch (error) {
-          console.error("Fetch error:", error);
-          alert("Error loading birthdays");
-        } 
-      }, []);
-    
-      useEffect(() => {
-        fetchBirthdays();
-      }, [fetchBirthdays]);
     
   return (
     <section className='flex w-[300px] flex-col mt-16 mr-1 bg-[F8F8F8] p-4 rounded-lg gap-6 shadow-md'>
