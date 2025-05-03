@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
+import RequireAuth from "./hooks/ProtectRoute";
 
 const Auth = lazy(() => import('./pages/auth'));
  const Dashboard = lazy(() => import('./pages/Dashboard'));
@@ -27,7 +28,9 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <Dashboard/>
+        <RequireAuth>
+          <Dashboard />
+        </RequireAuth>
       </Suspense>
     ),
   },

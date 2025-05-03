@@ -1,5 +1,5 @@
-import React, { useEffect, useState} from 'react'
-import data from '@/constant'
+import React, { useEffect, useState, useCallback} from 'react'
+// import data from '@/constant'
 import { GoPulse } from "react-icons/go";
 import ActivityCard from './ActivityCard';
 import axios from 'axios';
@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const ActivitySection = () => {
+    const [birthdays, setBirthdays] = useState([]);
     const navigate = useNavigate();
     const logout = useAuthStore((state) => state.logout);
     const handleLogout = async () => {
@@ -21,6 +22,7 @@ const ActivitySection = () => {
         }
     }
     const [user, setUser] = useState("");
+
     useEffect(() => {
         const fetchUser = async () => {
             try {
@@ -36,6 +38,23 @@ const ActivitySection = () => {
     
         fetchUser();
     }, []);
+
+    const fetchBirthdays = useCallback(async () => {
+        try {
+          const { data } = await axios.get("http://localhost:5000/api/birthday/", {
+            withCredentials: true,
+          });
+          setBirthdays(data.birthdayAll || []);
+        } catch (error) {
+          console.error("Fetch error:", error);
+          alert("Error loading birthdays");
+        } 
+      }, []);
+    
+      useEffect(() => {
+        fetchBirthdays();
+      }, [fetchBirthdays]);
+    
   return (
     <section className='flex w-[300px] flex-col mt-16 mr-1 bg-[F8F8F8] p-4 rounded-lg gap-6 shadow-md'>
         <div className='flex items-center gap-4'>
@@ -50,10 +69,11 @@ const ActivitySection = () => {
             <h3 className='text-2xl text-[#09455D]'>Recent activity</h3>
         </div>
         <div className="flex flex-col gap-2">
-            {data.map((person) => (
+            {birthdays.map((person) => (
             <ActivityCard
-                key={person.id}
+                key={person._id}
                 birthday={person}
+                onUpdate={fetchBirthdays}
             />
             ))}
         </div>

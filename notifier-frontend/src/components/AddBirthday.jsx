@@ -23,7 +23,8 @@ const months = [
 
 const days = Array.from({ length: 31 }, (_, i) => i + 1);
 
-const AddBirthday = ({ open, onClose, onUpdate }) => {
+const AddBirthday = ({ open, onClose, onUpdate , birthday}) => {
+  console.log(birthday);
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -35,6 +36,26 @@ const AddBirthday = ({ open, onClose, onUpdate }) => {
     reminderYear: "",
     image: null,
   });
+  
+  const fillDetails = () => {
+    if(birthday){
+      setForm({
+        firstName: birthday.firstName,
+        lastName: birthday.lastName,
+        birthdayDay: new Date(birthday.birthday).getDate(),
+        birthdayMonth: months[new Date(birthday.birthday).getMonth()],
+        age: "",
+        reminderDay: "",
+        reminderMonth: "",
+        reminderYear: "",
+        image: birthday.image,
+      })
+    }
+  }
+
+  useEffect(()=> {
+    fillDetails();
+  }, [birthday])
 
   const handleSubmit = async () => {
     const formData = new FormData();
@@ -44,19 +65,36 @@ const AddBirthday = ({ open, onClose, onUpdate }) => {
     formData.append("image", form.image);
 
     try {
-      const { data } = await axios.post(
-        "http://localhost:5000/api/birthday/add",
-        formData,  
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data" 
+      if (birthday){
+        const { data } = await axios.put(
+          `http://localhost:5000/api/birthday/${birthday._id}`,
+          formData,  
+          {
+            withCredentials: true,
+            headers: {
+              "Content-Type": "multipart/form-data" 
+            }
           }
-        }
-      );
-      alert("Birthday added successfully!");
-      onClose(); 
-      onUpdate();
+        );
+        alert("Birthday edited successfully!");
+        onClose(); 
+        onUpdate();
+      }
+      else{
+        const { data } = await axios.post(
+          "http://localhost:5000/api/birthday/add",
+          formData,  
+          {
+            withCredentials: true,
+            headers: {
+              "Content-Type": "multipart/form-data" 
+            }
+          }
+        );
+        alert("Birthday added successfully!");
+        onClose(); 
+        onUpdate();
+      }
 
     } catch (error) {
       console.error(error);
@@ -76,19 +114,7 @@ const AddBirthday = ({ open, onClose, onUpdate }) => {
     }
   };
 
-  useEffect(() => {
-    setForm({
-      firstName: "",
-      lastName: "",
-      birthdayDay: "",
-      birthdayMonth: "",
-      age: "",
-      reminderDay: "",
-      reminderMonth: "",
-      reminderYear: "",
-      image: null
-    });
-  }, [open]);
+ 
 
   if (!open) return null;
 
@@ -115,15 +141,20 @@ const AddBirthday = ({ open, onClose, onUpdate }) => {
           </div>
           <p className="text-base text-[#09455D] mt-[-20px]">Fill in the details and we’d be sure to do the rest!</p>
           <div className="w-24 h-24 rounded-full bg-[#D9D9D9] flex items-center justify-center cursor-pointer relative overflow-hidden">
-            {form.image ? (
+          {form.image ? (
               <img
-                src={URL.createObjectURL(form.image)}
+                src={
+                  typeof form.image === 'string'
+                    ? form.image 
+                    : URL.createObjectURL(form.image) 
+                }
                 alt="Uploaded"
                 className="object-cover w-full h-full"
               />
             ) : (
               <IoPersonOutline className="text-5xl text-white" />
             )}
+
             <input
               type="file"
               accept="image/png, image/jpeg"
