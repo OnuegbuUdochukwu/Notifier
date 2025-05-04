@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
         required : [true, 'please enter a password'],
         minlength: [8, 'password must be more than 8 characters long']
     }
-})
+},{timestamps: true})
 
 
 userSchema.pre('save', async function(next) {

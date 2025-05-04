@@ -4,7 +4,7 @@ module.exports.getUsername = async(req, res)=>{
         if(!user) res.status(400).json({message: 'user not found'})
         
         res.json({
-            username: user.name || user.email
+            username: user.username || user.email
             });
     } 
     catch (err) {

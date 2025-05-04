@@ -11,9 +11,54 @@ module.exports.getAllBdays = async(req, res)=>{
         })
     }catch(err){
         res.status(500).json({message: err.message})
-    }
-   
+    }   
 }
+
+module.exports.filterBdays = async (req, res)=>{
+        try{
+            const userId = req.user.id
+            const {name, dateAdded, month} = req.query
+            
+            //by name first or lastname
+            let filter = {user: userId}
+            if(name) {
+                filter.$or = [ 
+                    {firstName: {$regex: name, $options: "i"}},
+                    {lastName: {$regex: name, $options: "i"}}
+                ];
+            }
+
+            //by date added
+    
+            if (dateAdded){
+                const date = new Date(dateAdded);
+                const nextday = new Date(date)
+                nextday.setDate(nextday.getDate() + 1)
+    
+                filter.createdAt = {
+                    $gte: date, 
+                    $lt: nextday
+                }
+            }
+            
+            // by month
+            if(month){
+                const monthNum = parseInt(month)
+                if(!isNaN(monthNum) && monthNum >= 1 && monthNum <= 12){
+                    filter.$expr = {
+                        $eq: [{$month: '$birthday'}, monthNum]
+                    }
+                }
+            }
+    
+            const birthdays = await Birthday.find(filter).sort({birthday: 1})
+            res.status(200).json({ success: true, data: birthdays });
+
+        } catch (error) {
+          res.status(500).json({ success: false, message: 'Server Error', error: error.message });
+        }
+};
+
 
 module.exports.addBirthday = async(req, res)=>{
     const {firstName, lastName, birthday} = req.body

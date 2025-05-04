@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const {
     getAllBdays,
+    filterBdays,
     addBirthday, 
     searchBirthday,
     updateBirthday,
@@ -12,7 +13,7 @@ const {
 const protect = require('../middleware/authMiddleware')
 const {upload} = require('../middleware/cloudinary')
 
-
+router.get('/filter', protect, filterBdays)
 router.get('/', protect, getAllBdays )
 router.get('/add', protect , addBirthday)
 // router.get('/search/', searchBirthday)
