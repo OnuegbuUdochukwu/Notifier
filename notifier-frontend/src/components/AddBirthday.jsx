@@ -52,10 +52,25 @@ const AddBirthday = ({ open, onClose, onUpdate , birthday}) => {
       })
     }
   }
-
+  
   useEffect(()=> {
     fillDetails();
   }, [birthday])
+
+  const handleClose = () => {
+    setForm({
+      firstName: "",
+      lastName: "",
+      birthdayDay: "",
+      birthdayMonth: "",
+      age: "",
+      reminderDay: "",
+      reminderMonth: "",
+      reminderYear: "",
+      image: null,
+    });
+    onClose();
+  }
 
   const handleSubmit = async () => {
     const formData = new FormData();
@@ -76,7 +91,7 @@ const AddBirthday = ({ open, onClose, onUpdate , birthday}) => {
             }
           }
         );
-        alert("Birthday edited successfully!");
+        // alert("Birthday edited successfully!");
         onClose(); 
         onUpdate();
       }
@@ -91,14 +106,14 @@ const AddBirthday = ({ open, onClose, onUpdate , birthday}) => {
             }
           }
         );
-        alert("Birthday added successfully!");
+        // alert("Birthday added successfully!");
         onClose(); 
         onUpdate();
       }
 
     } catch (error) {
       console.error(error);
-      alert("There was an error while adding the birthday. Please try again.");
+      // alert("There was an error while adding the birthday. Please try again.");
     }
   };
 
@@ -128,7 +143,7 @@ const AddBirthday = ({ open, onClose, onUpdate , birthday}) => {
         onClick={(e) => e.stopPropagation()} 
       >
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className="absolute top-3 right-2 text-gray-700 text-2xl"
         >
           <IoClose />

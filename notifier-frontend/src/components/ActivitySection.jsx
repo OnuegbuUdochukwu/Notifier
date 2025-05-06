@@ -17,7 +17,7 @@ const ActivitySection = ({fetchBirthdays, birthdays}) => {
         }
         catch(error){
             console.error('logout failed',error)
-            alert("logout failed please try again")
+            // alert("logout failed please try again")
         }
     }
     const [user, setUser] = useState("");

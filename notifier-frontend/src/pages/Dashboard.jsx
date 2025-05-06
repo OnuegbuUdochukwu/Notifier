@@ -24,9 +24,9 @@ const Dashboard = () => {
           setBirthdays(data.birthdayAll || []);
         } catch (error) {
           console.error("Fetch error:", error);
-          alert("Error loading birthdays");
+          // alert("Error loading birthdays");
         } 
-      });
+      },[]);
     
       useEffect(() => {
         fetchBirthdays();
