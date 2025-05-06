@@ -13,7 +13,7 @@ const {
 const protect = require('../middleware/authMiddleware')
 const {upload} = require('../middleware/cloudinary')
 
-router.get('/filter', protect, filterBdays)
+// router.get('/filter', protect, filterBdays)
 router.get('/', protect, getAllBdays )
 router.get('/add', protect , addBirthday)
 // router.get('/search/', searchBirthday)
